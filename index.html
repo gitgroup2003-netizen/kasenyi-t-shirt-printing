@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kasenyi T-Shirt Printing — Custom Printed Tees, Kasenyi & Entebbe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F0EAD9;
+    --canvas-2:#E7DEC7;
+    --ink:#201E1B;
+    --charcoal:#2B2A27;
+    --teal:#12615C;
+    --teal-dark:#0C4744;
+    --yellow:#F3B23A;
+    --crimson:#C22B26;
+    --line:rgba(32,30,27,0.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Anton',sans-serif;letter-spacing:0.01em;text-transform:uppercase;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal-dark);
+    font-weight:700;
+  }
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:3px solid var(--crimson);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(240,234,217,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{display:flex;flex-direction:column;line-height:1;}
+  .brand .k1{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:0.02em;}
+  .brand .k2{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--teal-dark);margin-top:3px;}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.links a{position:relative;padding:4px 0;}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--crimson);transition:width .25s ease;}
+  nav.links a:hover::after{width:100%;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+    padding:11px 18px;border-radius:3px;border:2px solid var(--ink);
+    background:var(--ink);color:var(--canvas);
+    cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--crimson);}
+  .btn.outline{background:transparent;color:var(--ink);}
+  .btn.wa{background:var(--teal);border-color:var(--teal);color:var(--canvas);}
+  .btn.wa:hover{box-shadow:4px 4px 0 var(--yellow);}
+  .menu-toggle{display:none;background:none;border:none;font-size:26px;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:72px 0 40px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;}
+  .hero h1{font-size:clamp(40px,6.2vw,74px);line-height:0.96;margin:14px 0 22px;}
+  .hero h1 .streak{
+    background:linear-gradient(90deg,var(--crimson),var(--crimson) 60%, transparent 60%);
+    background-size:220% 100%;
+    background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    display:inline-block;
+    animation:reveal 1.4s .3s cubic-bezier(.65,0,.35,1) forwards;
+  }
+  @keyframes reveal{to{background-position:0% 0;}}
+  .hero p.lead{font-size:17px;max-width:440px;color:var(--charcoal);margin-bottom:28px;}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+  .hero .trust-line{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal-dark);}
+
+  .tee-art{position:relative;}
+  .tee-art svg{width:100%;height:auto;}
+  .squeegee{
+    stroke-dasharray:900;stroke-dashoffset:900;
+    animation:draw 1.6s .2s ease forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* ---------- STITCH DIVIDER ---------- */
+  .stitch{width:100%;height:26px;display:block;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{padding:64px 0;background:var(--canvas-2);}
+  .steps-head{max-width:520px;margin-bottom:40px;}
+  .steps-head h2{font-size:clamp(28px,4vw,40px);margin-top:10px;}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .step{
+    background:var(--canvas);border:1px solid var(--line);border-radius:6px;
+    padding:26px 22px;position:relative;
+  }
+  .step .num{
+    font-family:'Anton',sans-serif;font-size:46px;color:var(--yellow);
+    -webkit-text-stroke:2px var(--ink);
+  }
+  .step h3{font-size:18px;margin:10px 0 8px;text-transform:uppercase;font-family:'Anton',sans-serif;letter-spacing:0.02em;font-weight:400;}
+  .step p{font-size:14.5px;color:var(--charcoal);}
+
+  /* ---------- SHOP ---------- */
+  .shop{padding:70px 0;}
+  .shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:36px;flex-wrap:wrap;}
+  .shop-head h2{font-size:clamp(28px,4vw,40px);margin-top:10px;}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .card{
+    background:var(--canvas-2);border:1px solid var(--line);border-radius:8px;
+    padding:18px;display:flex;flex-direction:column;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(32,30,27,0.14);}
+  .card .swatch{
+    aspect-ratio:1/1;border-radius:6px;margin-bottom:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card .swatch svg{width:62%;}
+  .card h3{font-size:15.5px;text-transform:uppercase;font-family:'Anton',sans-serif;font-weight:400;letter-spacing:0.02em;margin-bottom:6px;}
+  .card p.desc{font-size:13px;color:var(--charcoal);margin-bottom:14px;flex-grow:1;}
+  .card .price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .card .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;}
+  .card .price span{font-size:11px;color:var(--charcoal);font-weight:500;}
+  .card .btn{width:100%;justify-content:center;padding:10px;font-size:12px;}
+
+  /* ---------- BULK / EVENTS ---------- */
+  .bulk{background:var(--teal);color:var(--canvas);padding:70px 0;position:relative;}
+  .bulk .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .bulk .eyebrow{color:var(--yellow);}
+  .bulk h2{font-size:clamp(28px,4vw,38px);margin:10px 0 16px;}
+  .bulk p{font-size:15px;max-width:440px;opacity:0.92;margin-bottom:22px;}
+  .bulk-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+  .bulk-tags span{
+    font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid rgba(240,234,217,0.4);
+    padding:7px 12px;border-radius:20px;
+  }
+  .bulk .btn{background:var(--yellow);border-color:var(--yellow);color:var(--ink);}
+  .bulk .btn:hover{box-shadow:4px 4px 0 var(--crimson);}
+  .bulk-card{background:var(--teal-dark);border-radius:10px;padding:26px;}
+  .bulk-card .row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed rgba(240,234,217,0.25);font-size:14px;}
+  .bulk-card .row:last-child{border-bottom:none;}
+  .bulk-card .row b{font-family:'JetBrains Mono',monospace;color:var(--yellow);}
+
+  /* ---------- TRUST / PAYMENT ---------- */
+  .trust{padding:64px 0;}
+  .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
+  .trust h2{font-size:clamp(26px,3.6vw,34px);margin:10px 0 18px;}
+  .pay-methods{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+  .pay-methods div{
+    background:var(--canvas-2);border:1px solid var(--line);border-radius:8px;
+    padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;
+    display:flex;align-items:center;gap:8px;
+  }
+  .quotes{display:flex;flex-direction:column;gap:18px;}
+  .quote{background:var(--canvas-2);border-left:3px solid var(--crimson);padding:16px 18px;border-radius:0 6px 6px 0;}
+  .quote p{font-size:14.5px;font-style:italic;margin-bottom:8px;}
+  .quote .who{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--teal-dark);font-style:normal;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:var(--canvas);padding:56px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+  footer h4{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:14px;}
+  footer .brand-foot{font-family:'Anton',sans-serif;font-size:26px;margin-bottom:10px;}
+  footer p, footer li{font-size:13.5px;color:rgba(240,234,217,0.78);}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  footer .btn{margin-top:14px;}
+  .foot-bottom{border-top:1px solid rgba(240,234,217,0.15);padding-top:20px;font-size:12px;color:rgba(240,234,217,0.55);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-wa{
+    position:fixed;right:22px;bottom:22px;z-index:60;
+    background:var(--teal);color:var(--canvas);width:58px;height:58px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(18,97,92,0.4);
+  }
+  .float-wa::before{
+    content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--teal);
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{0%{transform:scale(1);opacity:0.7;}100%{transform:scale(1.7);opacity:0;}}
+
+  @media (max-width:920px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero .tee-art{order:-1;max-width:280px;margin:0 auto;}
+    .step-grid{grid-template-columns:1fr;}
+    .product-grid{grid-template-columns:repeat(2,1fr);}
+    .bulk .wrap{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <a href="#top" class="brand">
+      <span class="k1">Kasenyi</span>
+      <span class="k2">T-SHIRT PRINTING</span>
+    </a>
+    <nav class="links">
+      <a href="#shop">Shop</a>
+      <a href="#how">How it works</a>
+      <a href="#bulk">Bulk &amp; events</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn wa" href="https://wa.me/256700000000" target="_blank" rel="noopener">Order on WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Custom printed tees · Kasenyi, Entebbe</span>
+        <h1 class="display">Your design.<br><span class="streak">Our press.</span></h1>
+        <p class="lead">Screen-printed and vinyl-printed t-shirts for individuals, teams, churches, schools and companies. Send your artwork on WhatsApp, we print it fresh, you collect or we deliver.</p>
+        <div class="cta-row">
+          <a class="btn wa" href="https://wa.me/256700000000" target="_blank" rel="noopener">Chat &amp; order on WhatsApp</a>
+          <a class="btn outline" href="#shop">See what we print</a>
+        </div>
+        <div class="trust-line">MTN &amp; Airtel Mobile Money accepted · Same-week turnaround</div>
+      </div>
+      <div class="tee-art" aria-hidden="true">
+        <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 40 L60 70 L30 110 L60 140 L90 118 L90 280 L230 280 L230 118 L260 140 L290 110 L260 70 L220 40 C220 40 205 62 160 62 C115 62 100 40 100 40 Z" fill="#F0EAD9" stroke="#201E1B" stroke-width="6" stroke-linejoin="round"/>
+          <path class="squeegee" d="M75 150 L245 150" stroke="#C22B26" stroke-width="26" stroke-linecap="round"/>
+          <path class="squeegee" d="M95 195 Q160 175 225 195" stroke="#F3B23A" stroke-width="14" stroke-linecap="round" fill="none" style="animation-delay:.7s"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <svg class="stitch" viewBox="0 0 1160 26" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="0" y1="13" x2="1160" y2="13" stroke="#201E1B" stroke-width="2" stroke-dasharray="10 8" opacity="0.35"/>
+  </svg>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps" id="how">
+    <div class="wrap">
+      <div class="steps-head">
+        <span class="eyebrow">The process</span>
+        <h2 class="display">From idea to<br>fresh print</h2>
+      </div>
+      <div class="step-grid">
+        <div class="step">
+          <div class="num">01</div>
+          <h3>Send your design</h3>
+          <p>WhatsApp us your logo, artwork, or just an idea — a name, a slogan, a date. No design? We'll sketch options with you.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3>We print it</h3>
+          <p>Screen print for bulk runs, vinyl/DTF for detailed or small-batch designs. You approve a proof before we run the press.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3>Collect or delivered</h3>
+          <p>Pick up at our Kasenyi workshop, or we deliver within Entebbe. Pay by Mobile Money or cash on collection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="stitch" viewBox="0 0 1160 26" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="0" y1="13" x2="1160" y2="13" stroke="#201E1B" stroke-width="2" stroke-dasharray="10 8" opacity="0.35"/>
+  </svg>
+
+  <!-- SHOP -->
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <div class="shop-head">
+        <div>
+          <span class="eyebrow">Popular orders</span>
+          <h2 class="display">What we print</h2>
+        </div>
+        <p style="max-width:340px;font-size:14px;color:var(--charcoal);">Sample pricing below — final price depends on quantity, print size and fabric. Ask on WhatsApp for an exact quote.</p>
+      </div>
+      <div class="product-grid">
+
+        <div class="card">
+          <div class="swatch" style="background:#E4CFA5;">
+            <svg viewBox="0 0 100 100"><path d="M30 12 L18 22 L10 34 L18 44 L28 34 L28 88 L72 88 L72 34 L82 44 L90 34 L82 22 L70 12 C70 12 63 22 50 22 C37 22 30 12 30 12 Z" fill="#F0EAD9" stroke="#201E1B" stroke-width="3"/></svg>
+          </div>
+          <h3>Single custom tee</h3>
+          <p class="desc">One-off print of your own design. Cotton tee, vinyl or DTF print.</p>
+          <div class="price-row"><span class="price">25,000 <span>UGX</span></span></div>
+          <a class="btn" href="https://wa.me/256700000000?text=Hi%2C%20I%27d%20like%20to%20order%20a%20single%20custom%20tee" target="_blank" rel="noopener">Order</a>
+        </div>
+
+        <div class="card">
+          <div class="swatch" style="background:#BFD8CF;">
+            <svg viewBox="0 0 100 100"><path d="M30 12 L18 22 L10 34 L18 44 L28 34 L28 88 L72 88 L72 34 L82 44 L90 34 L82 22 L70 12 C70 12 63 22 50 22 C37 22 30 12 30 12 Z" fill="#F0EAD9" stroke="#201E1B" stroke-width="3"/></svg>
+          </div>
+          <h3>Team &amp; sports kits</h3>
+          <p class="desc">Matching jerseys with numbers and names. Screen printed for durability.</p>
+          <div class="price-row"><span class="price">from 18,000 <span>UGX / shirt</span></span></div>
+          <a class="btn" href="https://wa.me/256700000000?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20a%20team%20kit" target="_blank" rel="noopener">Get quote</a>
+        </div>
+
+        <div class="card">
+          <div class="swatch" style="background:#EFCFC7;">
+            <svg viewBox="0 0 100 100"><path d="M30 12 L18 22 L10 34 L18 44 L28 34 L28 88 L72 88 L72 34 L82 44 L90 34 L82 22 L70 12 C70 12 63 22 50 22 C37 22 30 12 30 12 Z" fill="#F0EAD9" stroke="#201E1B" stroke-width="3"/></svg>
+          </div>
+          <h3>Church &amp; event tees</h3>
+          <p class="desc">Anniversaries, retreats, crusades — bulk printing with fast turnaround.</p>
+          <div class="price-row"><span class="price">from 15,000 <span>UGX / shirt</span></span></div>
+          <a class="btn" href="https://wa.me/256700000000?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20event%20tees" target="_blank" rel="noopener">Get quote</a>
+        </div>
+
+        <div class="card">
+          <div class="swatch" style="background:#E3D6EF;">
+            <svg viewBox="0 0 100 100"><path d="M30 12 L18 22 L10 34 L18 44 L28 34 L28 88 L72 88 L72 34 L82 44 L90 34 L82 22 L70 12 C70 12 63 22 50 22 C37 22 30 12 30 12 Z" fill="#F0EAD9" stroke="#201E1B" stroke-width="3"/></svg>
+          </div>
+          <h3>Company branded wear</h3>
+          <p class="desc">Logo tees and polos for staff, boda riders, promoters and shops.</p>
+          <div class="price-row"><span class="price">from 20,000 <span>UGX / shirt</span></span></div>
+          <a class="btn" href="https://wa.me/256700000000?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20branded%20company%20wear" target="_blank" rel="noopener">Get quote</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BULK / EVENTS -->
+  <section class="bulk" id="bulk">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Bulk orders</span>
+        <h2 class="display">Printing for a<br>whole crowd</h2>
+        <p>Weddings, school events, campaigns, church anniversaries, company uniforms — the bigger the order, the better the price per shirt.</p>
+        <div class="bulk-tags">
+          <span>Churches</span><span>Schools</span><span>Sports teams</span><span>Companies</span><span>NGOs &amp; campaigns</span>
+        </div>
+        <a class="btn" href="https://wa.me/256700000000?text=Hi%2C%20I%27d%20like%20a%20bulk%20order%20quote" target="_blank" rel="noopener">Request a bulk quote</a>
+      </div>
+      <div class="bulk-card">
+        <div class="row"><span>10 – 29 shirts</span><b>Standard price</b></div>
+        <div class="row"><span>30 – 99 shirts</span><b>10% off</b></div>
+        <div class="row"><span>100+ shirts</span><b>18% off</b></div>
+        <div class="row"><span>Design &amp; proof</span><b>Free</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / PAYMENT -->
+  <section class="trust">
+    <div class="wrap trust-grid">
+      <div>
+        <span class="eyebrow">Easy to pay, easy to trust</span>
+        <h2 class="display">Pay your way</h2>
+        <div class="pay-methods">
+          <div>📱 MTN Mobile Money</div>
+          <div>📱 Airtel Money</div>
+          <div>💵 Cash on collection</div>
+        </div>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <p>"Ordered 40 matching shirts for our school sports day, ready in three days and every print was sharp."</p>
+          <div class="who">— Local school, Entebbe</div>
+        </div>
+        <div class="quote">
+          <p>"Easiest ordering process — sent our logo on WhatsApp and picked up the finished shirts two days later."</p>
+          <div class="who">— Small business owner, Kasenyi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand-foot">KASENYI</div>
+        <p>Custom screen &amp; vinyl printed t-shirts, made in Kasenyi. Individuals, teams, churches, schools and companies welcome.</p>
+        <a class="btn wa" href="https://wa.me/256700000000" target="_blank" rel="noopener">Message us on WhatsApp</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>WhatsApp: +256 700 000 000</li>
+          <li>orders@kasenyitshirtprinting.com</li>
+          <li>Kasenyi, Entebbe, Uganda</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Sat: 8:30am – 7:00pm</li>
+          <li>Sunday: Closed</li>
+          <li>Walk-ins welcome</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Kasenyi T-Shirt Printing</span>
+      <span>Prices shown in UGX, subject to design &amp; quantity</span>
+    </div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/256700000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.87 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1H12a7.94 7.94 0 0 0 5.6-13.58ZM12.05 18.4a6.55 6.55 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.28-3.4 6.56 6.56 0 0 1-6.69 6.5Zm3.6-4.9c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.6-.98 5.9 5.9 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4.09-.1.2-.23.3-.35.1-.11.13-.2.2-.32a.36.36 0 0 0-.02-.35c-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.37a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.63c0 .96.7 1.9.8 2.03.1.13 1.38 2.1 3.34 2.95.47.2.83.32 1.11.41.47.15.9.13 1.24.08.38-.06 1.17-.48 1.34-.94.16-.46.16-.86.12-.94-.05-.09-.18-.14-.38-.24Z" fill="#F0EAD9"/></svg>
+</a>
+
+<script>
+  // mobile menu toggle (simple show/hide of links list as a stacked panel)
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.nav');
+    const links = document.querySelector('.links');
+    if(window.innerWidth <= 920){
+      const btn = document.createElement('button');
+      btn.className = 'menu-toggle';
+      btn.setAttribute('aria-label','Toggle menu');
+      btn.textContent = '☰';
+      nav.insertBefore(btn, links);
+      btn.addEventListener('click', () => {
+        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '100%';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'var(--canvas)';
+        links.style.padding = '18px 24px';
+        links.style.borderBottom = '1px solid var(--line)';
+        links.style.gap = '16px';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
